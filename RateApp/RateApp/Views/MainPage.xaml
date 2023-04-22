@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:RateApp.ViewModels" xmlns:models="clr-namespace:RateApp.Models" xmlns:controls="clr-namespace:RateApp.Controls"
+             x:Class="RateApp.Views.MainPage"
+             x:DataType="viewmodels:MainPageViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="#001A5C"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="*, Auto" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+        <controls:ExtendedCarouselView Margin="0, 50, 0, 0"
+                                       HorizontalOptions="FillAndExpand" 
+                                       InputTransparent="True" 
+                                       ItemsSource="{Binding IntroductionItems}"
+                                       SelectedItem="{Binding SelectedIntroductionItem}"
+                                       x:Name="IntroductionItems">
+
+            <controls:ExtendedCarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                           SnapPointsType="MandatorySingle"
+                           SnapPointsAlignment="Start" />
+            </controls:ExtendedCarouselView.ItemsLayout>
+
+            <controls:ExtendedCarouselView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type models:IntroductionItem}">
+                    <StackLayout>
+                        <Image Source="{Binding Image}" HeightRequest="300" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding Description}" HorizontalOptions="Center" FontSize="32" TextColor="#0071BC" FontFamily="Antonio"/>
+                    </StackLayout>
+                </DataTemplate>
+            </controls:ExtendedCarouselView.ItemTemplate>
+            
+        </controls:ExtendedCarouselView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="Auto, *, Auto" Margin="0, 0, 0, 80">
+            <Button BackgroundColor="#00FFFFFF" TextTransform="None" Text="skip" FontSize="32" TextColor="#0071BC" FontFamily="Antonio"/>
+
+            <controls:CarouselIndicators Grid.Column="1"
+                                         SelectedIndicator="selected_radio.png"
+                                         UnselectedIndicator="unselected_radio.png"
+                                         ItemsSource="{Binding IntroductionItems}"
+                                         Position="{Binding Position, Source={Reference IntroductionItems}}"
+                                         IndicatorHeight="30"
+                                         IndicatorWidth="30"
+                                         HorizontalOptions="Center" VerticalOptions="Center">
+            </controls:CarouselIndicators>
+            
+            <!--<Grid ColumnDefinitions="*, *, *" Grid.Column="1" HorizontalOptions="Center" ColumnSpacing="10">
+                <Image Grid.Column="0" Source="selected_radio.png" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="30" HeightRequest="30"/>
+                <Image Grid.Column="1" Source="unselected_radio.png" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="30" HeightRequest="30"/>
+                <Image Grid.Column="2" Source="unselected_radio.png" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="30" HeightRequest="30"/>
+            </Grid>-->
+            <Button Grid.Column="2" BackgroundColor="#00FFFFFF" TextTransform="None" Text="next" FontSize="32" TextColor="#0071BC" FontFamily="Antonio"
+                    Command="{Binding NextCommand}"/>
+        </Grid>
+        
+    </Grid>
+
+</ContentPage>
