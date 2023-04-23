@@ -5,17 +5,20 @@ using RateApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace RateApp.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class IntroductionViewModel : ViewModelBase
     {
         private IntroductionItem _selectedItem;
 
-        public MainPageViewModel(INavigationService navigationService)
+        public IntroductionViewModel(INavigationService navigationService)
                     : base(navigationService)
         {
             Title = "Main Page";
@@ -41,11 +44,14 @@ namespace RateApp.ViewModels
                 }
             };
 
-            NextCommand = new Command(Next);
+            NextCommand = new AsyncCommand(Next);
+            SkipCommand = new AsyncCommand(Skip);
             SelectedIntroductionItem = IntroductionItems.First();
         }
 
         public ICommand NextCommand { get; set; }
+
+        public ICommand SkipCommand { get; set; }
 
         public List<IntroductionItem> IntroductionItems { get; set; }
 
@@ -58,14 +64,26 @@ namespace RateApp.ViewModels
             }
         }
 
-        private void Next(object obj)
+        private async Task Skip()
+        {
+            await NavigationService.NavigateAsync(nameof(TitleSelectionScreenViewModel));
+        }
+
+        private async Task Next()
         {
             if (SelectedIntroductionItem == null)
                 return;
 
             var index = IntroductionItems.IndexOf(SelectedIntroductionItem);
-            var nextIndex = (index + 1) % 3;
-            SelectedIntroductionItem = IntroductionItems[nextIndex];
+            var nextIndex = index + 1;
+            if (nextIndex >= 3)
+            {
+                await NavigationService.NavigateAsync(nameof(TitleSelectionScreenViewModel));
+            }
+            else
+            {
+                SelectedIntroductionItem = IntroductionItems[nextIndex];
+            }
         }
     }
 }

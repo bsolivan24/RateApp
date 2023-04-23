@@ -19,7 +19,7 @@ namespace RateApp
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync($"NavigationPage/{nameof(IntroductionViewModel)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -27,7 +27,8 @@ namespace RateApp
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<IntroductionPage, IntroductionViewModel>(nameof(IntroductionViewModel));
+            containerRegistry.RegisterForNavigation<TitleSelectionPage, TitleSelectionScreenViewModel>(nameof(TitleSelectionScreenViewModel));
         }
     }
 }

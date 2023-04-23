@@ -1,8 +1,8 @@
 ﻿namespace RateApp.Views
 {
-    public partial class MainPage
+    public partial class IntroductionPage
     {
-        public MainPage()
+        public IntroductionPage()
         {
             InitializeComponent();
         }
