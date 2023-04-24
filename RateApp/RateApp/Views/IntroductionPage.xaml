@@ -5,10 +5,7 @@
              xmlns:models="clr-namespace:RateApp.Models"
              xmlns:controls="clr-namespace:RateApp.Controls"
              x:Class="RateApp.Views.IntroductionPage"
-             x:DataType="viewmodels:IntroductionViewModel"
-             Title="{Binding Title}"
-             BackgroundColor="#001A5C"
-             NavigationPage.HasNavigationBar="False">
+             x:DataType="viewmodels:IntroductionViewModel">
 
     <Grid RowDefinitions="*, Auto" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
@@ -29,7 +26,7 @@
                 <DataTemplate x:DataType="{x:Type models:IntroductionItem}">
                     <StackLayout>
                         <Image Source="{Binding Image}" HeightRequest="300" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="{Binding Description}" HorizontalOptions="Center" FontSize="32" TextColor="#0071BC" FontFamily="Antonio"/>
+                        <Label Text="{Binding Description}"/>
                     </StackLayout>
                 </DataTemplate>
             </controls:ExtendedCarouselView.ItemTemplate>
@@ -37,20 +34,24 @@
         </controls:ExtendedCarouselView>
 
         <Grid Grid.Row="1" ColumnDefinitions="Auto, *, Auto" Margin="0, 0, 0, 80">
-            <Button BackgroundColor="#00FFFFFF" TextTransform="None" Text="skip" FontSize="32" TextColor="#0071BC" FontFamily="Antonio"
+            
+            <Button Grid.Column="0"
+                    Text="skip"
                     Command="{Binding SkipCommand}"/>
 
             <controls:CarouselIndicators Grid.Column="1"
+                                         ColumnSpacing="20"
                                          SelectedIndicator="selected_radio.png"
                                          UnselectedIndicator="unselected_radio.png"
                                          ItemsSource="{Binding IntroductionItems}"
                                          Position="{Binding Position, Source={Reference IntroductionItems}}"
-                                         IndicatorHeight="30"
-                                         IndicatorWidth="30"
+                                         IndicatorHeight="20"
+                                         IndicatorWidth="20"
                                          HorizontalOptions="Center" VerticalOptions="Center">
             </controls:CarouselIndicators>
             
-            <Button Grid.Column="2" BackgroundColor="#00FFFFFF" TextTransform="None" Text="next" FontSize="32" TextColor="#0071BC" FontFamily="Antonio"
+            <Button Grid.Column="2" 
+                    Text="next" 
                     Command="{Binding NextCommand}"/>
         </Grid>
         

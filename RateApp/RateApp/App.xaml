@@ -5,7 +5,87 @@
              x:Class="RateApp.App">
   <Application.Resources>
 
-    <!-- Application resource dictionary -->
+        <ResourceDictionary>
 
-  </Application.Resources>
+            <Color x:Key="PrimaryColor">#001A5C</Color>
+            <Color x:Key="PrimaryForegroundColor">#0071BC</Color>
+            <Color x:Key="RadioSelectedStroke">#AFAFAF</Color>
+            
+            <Style TargetType="{x:Type ContentPage}" ApplyToDerivedTypes="True">
+                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
+            </Style>
+
+            <Style TargetType="{x:Type Button}" ApplyToDerivedTypes="True">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="TextTransform" Value="None"/>
+                <Setter Property="FontSize" Value="32"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryForegroundColor}"/>
+                <Setter Property="FontFamily" Value="Antonio"/>
+            </Style>
+
+            <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryForegroundColor}"/>
+                <Setter Property="FontSize" Value="32"/>
+                <Setter Property="FontFamily" Value="Antonio"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <ControlTemplate x:Key="RadioButtonTmeplate">
+
+                <Grid RowDefinitions="2, 22, 2" ColumnDefinitions="2, 22, 2">
+
+                    <VisualStateManager.VisualStateGroups>
+
+                        <VisualStateGroup x:Name="CheckedStates">
+
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="glowEllipse" Property="Ellipse.Fill">
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="{StaticResource PrimaryForegroundColor}" Offset="0"/>
+                                            <GradientStop Color="#0044CE" Offset="0.9"/>
+                                            <GradientStop Color="Transparent" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Setter>
+                                    <Setter TargetName="radialEllipse" Property="Ellipse.Stroke">
+                                        <SolidColorBrush Color="#AFAFAF"/>
+                                    </Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="glowEllipse" Property="Ellipse.Fill">
+                                        <RadialGradientBrush>
+                                            <GradientStop Color="Transparent" Offset="0"/>
+                                        </RadialGradientBrush>
+                                    </Setter>
+                                    <Setter TargetName="radialEllipse" Property="Ellipse.Stroke">
+                                        <SolidColorBrush Color="{StaticResource PrimaryForegroundColor}"/>
+                                    </Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+                            
+                        </VisualStateGroup>
+                        
+                    </VisualStateManager.VisualStateGroups>
+
+                    <Ellipse x:Name="glowEllipse" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+
+
+                    <Ellipse x:Name="radialEllipse" Grid.Row="1" Grid.Column="1"/>
+
+
+                </Grid>
+
+            </ControlTemplate>
+            
+        </ResourceDictionary>
+      
+    </Application.Resources>
 </prism:PrismApplication>

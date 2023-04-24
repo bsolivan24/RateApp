@@ -16,7 +16,7 @@ namespace RateApp.ViewModels
 {
     public class IntroductionViewModel : ViewModelBase
     {
-        private IntroductionItem _selectedItem;
+        private IntroductionItem _selectedInteractionItem;
 
         public IntroductionViewModel(INavigationService navigationService)
                     : base(navigationService)
@@ -57,16 +57,13 @@ namespace RateApp.ViewModels
 
         public IntroductionItem SelectedIntroductionItem
         {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-            }
+            get => _selectedInteractionItem;
+            set => SetProperty(ref _selectedInteractionItem, value);
         }
 
         private async Task Skip()
         {
-            await NavigationService.NavigateAsync(nameof(TitleSelectionScreenViewModel));
+            await NavigationService.NavigateAsync(nameof(TitleSelectionViewModel));
         }
 
         private async Task Next()
@@ -78,7 +75,7 @@ namespace RateApp.ViewModels
             var nextIndex = index + 1;
             if (nextIndex >= 3)
             {
-                await NavigationService.NavigateAsync(nameof(TitleSelectionScreenViewModel));
+                await NavigationService.NavigateAsync(nameof(TitleSelectionViewModel));
             }
             else
             {

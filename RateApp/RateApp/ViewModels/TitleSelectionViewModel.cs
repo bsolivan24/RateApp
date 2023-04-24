@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace RateApp.ViewModels
 {
-    public class TitleSelectionScreenViewModel : BindableBase
+    public class TitleSelectionViewModel : BindableBase
     {
-        public TitleSelectionScreenViewModel()
+        public TitleSelectionViewModel()
         {
 
         }

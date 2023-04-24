@@ -2,9 +2,9 @@
 
 namespace RateApp.Views
 {
-    public partial class IntroductionPage : ContentPage
+    public partial class SignInPage : ContentPage
     {
-        public IntroductionPage()
+        public SignInPage()
         {
             InitializeComponent();
         }
